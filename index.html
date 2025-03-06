@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap List Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-5">
+    <h1 class="mb-4">Book List</h1>
+    <img src="https://i.etsystatic.com/23719212/r/il/fb0389/2660290993/il_fullxfull.2660290993_tiza.jpg" class="img-fluid mb-2" alt="Responsive image">
+    
+    <div class="mb-4">
+        <input type="text" id="title" class="form-control mb-2" placeholder="Enter Title">
+        <input type="text" id="author" class="form-control mb-2" placeholder="Enter Author">
+        <input type="number" id="year" class="form-control mb-2" placeholder="Enter Year">
+        <button class="btn btn-primary" onclick="addToList()">Add to List</button>
+    </div>
+    
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody id="listTableBody">
+        </tbody>
+    </table>
+
+    <script>
+        function addToList() {
+            let title = document.getElementById('title').value;
+            let author = document.getElementById('author').value;
+            let year = document.getElementById('year').value;
+            
+            if (title && author && year) {
+                let tableBody = document.getElementById('listTableBody');
+                let row = tableBody.insertRow();
+                row.innerHTML = `<td>${title}</td><td>${author}</td><td>${year}</td><td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button></td>`;
+                
+                document.getElementById('title').value = '';
+                document.getElementById('author').value = '';
+                document.getElementById('year').value = '';
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+
+        function deleteRow(button) {
+            let row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
